@@ -1,4 +1,4 @@
-package io.cloudium.fyme.data.local
+package io.cloudium.fyme.data.local.Dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

@@ -32,7 +32,24 @@ class MainActivity : AppCompatActivity() {
                     if (it.data?.isEmpty() == true) {
                         return@Observer
                     }
-                    binding.tvText.setText(it.data?.get(0)?.name)
+                    binding.tvText.setText(it.data?.get(0)?.name + "\n" + it.data?.get(0)?.status
+                    + "\n" + it.data?.get(0)?.gender)
+                    Log.i("--->>", "--" + it.message)
+                    binding.progress.visibility = View.GONE
+                }
+                Resource.Status.ERROR -> {
+                    binding.progress.visibility = View.GONE
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+
+                }
+                Resource.Status.LOADING ->
+                    binding.progress.visibility = View.VISIBLE
+            }
+        })
+
+        viewModel.createContact.observe(this, Observer {
+            when (it.status) {
+                SUCCESS -> {
                     Log.i("--->>", "--" + it.message)
                     binding.progress.visibility = View.GONE
                 }
@@ -46,4 +63,5 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 }
